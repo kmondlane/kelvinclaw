@@ -185,9 +185,9 @@ impl WasmSkillTool {
         if let Some(value) = self.optional_bool(args, "allow_network_send")? {
             policy.allow_network_send = value;
         }
-        if let Some(value) = self.optional_bool(args, "allow_shell_exec")? {
-            policy.allow_shell_exec = value;
-        }
+        // allow_shell_exec is deliberately excluded from runtime override.
+        // It can only be enabled through explicit host-level configuration,
+        // never via untrusted tool call arguments.
         if let Some(value) = self.optional_usize(args, "max_module_bytes")? {
             policy.max_module_bytes = value;
         }
